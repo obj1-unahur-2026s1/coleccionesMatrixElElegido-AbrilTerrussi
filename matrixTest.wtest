@@ -1,9 +1,41 @@
+import nave.*
+import matrix.*
 
 
-describe "group of tests " {
+describe "test para matrix" {
 
-  test "test 01" {
-    assert.equals(100, 50+50)
+  test "nave con neo y morfeo, la nave acelera, solo salta morfeo, no esta equilibrada, esta el elegido en la nave" {
+    nave.agregarPasajero(neo)
+    nave.agregarPasajero(morfeo)
+    nave.noSonElElegido()
+    nave.acelera()
+    assert.that(nave.estaElElegido())
   }
 
+  test "si solo salta morfeo, su vitalidad dsimuye en uno (7) y se cansa"{
+    nave.agregarPasajero(neo)
+    nave.agregarPasajero(morfeo)
+    nave.noSonElElegido()
+    nave.acelera()
+    morfeo.estaCansado()
+    assert.equals(7, morfeo.vitalidad())
+  }
+
+  test "trinity no es la elegida"{
+    assert.notThat(trinity.esElegido())
+  }
+
+  test "neo es el pasajero de mayor vitalidad"{
+    nave.agregarPasajero(neo)
+    nave.agregarPasajero(morfeo)
+    nave.agregarPasajero(trinity)
+    assert.equals(neo, nave.pasajeroDeMAyorVitalidad())
+  } 
+
+  test "el elegido se encuentra entre los pasajeros"{
+    nave.agregarPasajero(neo)
+    nave.agregarPasajero(morfeo)
+    nave.agregarPasajero(trinity)
+    assert.that(nave.estaElElegido())
+  }
 }
